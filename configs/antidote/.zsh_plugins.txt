@@ -1,0 +1,6 @@
+Aloxaf/fzf-tab
+zsh-users/zsh-autosuggestions
+zsh-users/zsh-history-substring-search
+hlissner/zsh-autopair
+zdharma-continuum/fast-syntax-highlighting
+ohmyzsh/ohmyzsh path:plugins/git

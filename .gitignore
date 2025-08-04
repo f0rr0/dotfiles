@@ -1,0 +1,8 @@
+# zsh caches
+.zsh_plugins.zsh
+
+# macOS
+.DS_Store
+
+# local
+70-local.zsh

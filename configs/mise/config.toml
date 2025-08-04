@@ -1,0 +1,25 @@
+# Mise global configuration
+
+[settings]
+# Enable legacy version files (.node-version, .python-version, etc.)
+# Specify which tools should support idiomatic version files
+idiomatic_version_file_enable_tools = ["node", "python", "ruby", "go", "java"]
+
+# Number of parallel jobs for installs
+jobs = 4
+
+# Enable experimental features
+experimental = true
+
+# Enable lockfile
+lockfile = true
+
+[settings.python]
+# use virtualenv created by uv
+uv_venv_auto = true
+
+[tools]
+bun = "latest"
+node = "latest"
+python = "latest"
+

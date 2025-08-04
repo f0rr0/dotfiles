@@ -1,0 +1,70 @@
+palette = "snazzy_modified"
+
+format = """
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_state\
+$git_status\
+$cmd_duration\
+$line_break$character"""
+
+[directory]
+fish_style_pwd_dir_length = 1
+truncation_length = 4
+truncate_to_repo  = false
+style = "blue"
+format = "[$path]($style) "
+
+[character]
+success_symbol = "[❯](bright-purple)"
+error_symbol = "[❯](bright-red)"
+vimcmd_symbol = "[❮](bright-green)"
+
+[git_branch]
+format = "[$branch]($style)"
+style = "bright-black"
+
+[git_status]
+format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed)]($style)"
+style = "bright-cyan"
+conflicted = "​"
+untracked = "​"
+modified = "​"
+staged = "​"
+renamed = "​"
+deleted = "​"
+stashed = "≡"
+
+[git_state]
+format = '\([$state( $progress_current/$progress_total)]($style)\) '
+style = "bright-black"
+
+[cmd_duration]
+format = "[$duration]($style) "
+style = "bright-yellow"
+
+# Custom Palette: iTerm Snazzy Modified Colors
+[palettes.snazzy_modified]
+# Standard Colors (mapped to iTerm Snazzy Modified)
+black = "#000000"
+red = "#b83019"
+green = "#51bf37"
+yellow = "#c6c43d"
+blue = "#4da8de"
+purple = "#b93ec1"
+cyan = "#53c2c5"
+white = "#c7c7c7"
+bright-black = "#676767"
+bright-red = "#ef766d"
+bright-green = "#8cf67a"
+bright-yellow = "#fefb7e"
+bright-blue = "#6a71f6"
+bright-purple = "#f07ef8"
+bright-cyan = "#8ef9fd"
+bright-white = "#feffff"
+
+# Special Colors
+background = "#1e1e1e"
+cursor = "#c7c7c7"
