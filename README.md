@@ -1,6 +1,6 @@
 # 🚀 Modern Zsh Configuration
 
-A modular, maintainable, and feature-rich Zsh configuration built for developers.
+A blazing fast, maintainable, and feature-rich zsh configuration built for developers.
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/37e0c593-28fb-4c1d-bd0b-20144c08419e" alt="Terminal Preview" width="800">
