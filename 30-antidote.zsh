@@ -19,8 +19,8 @@ fi
 # =============================================================================
 
 # Plugin list and generated cache locations
-PLUG_TXT="$HOME/.zshrc.d/configs/antidote/.zsh_plugins.txt"
-PLUG_ZSH="$HOME/.zshrc.d/configs/antidote/.zsh_plugins.zsh"
+PLUG_TXT="$ZDOTDIR/configs/antidote/.zsh_plugins.txt"
+PLUG_ZSH="$ZDOTDIR/configs/antidote/.zsh_plugins.zsh"
 
 # Verify plugin list exists
 if [[ ! -f "$PLUG_TXT" ]]; then

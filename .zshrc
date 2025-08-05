@@ -8,19 +8,13 @@
 # Modular configuration loader
 # =============================================================================
 
-# Directory containing modular zsh configuration files
-export ZSHRC_D="$HOME/.zshrc.d"
-
 # Source all .zsh files in lexicographic order (00-env.zsh, 05-path.zsh, etc.)
 # Pattern notes:
 #  - [^_]*.zsh  => files NOT starting with "_" (prefix "_" to disable a file)
 #  - (Nn)       => N: nullglob (ignore if none), n: sort by name
-for f in "$ZSHRC_D"/[^_]*.zsh(Nn); do
+for f in "$ZDOTDIR"/[^_]*.zsh(Nn); do
   source "$f"
 done
 
 # Clean up
 unset f
-
-# bun completions
-[ -s "/Users/sid/.bun/_bun" ] && source "/Users/sid/.bun/_bun"

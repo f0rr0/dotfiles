@@ -5,7 +5,7 @@
 # =============================================================================
 
 # Set custom global config location
-export MISE_GLOBAL_CONFIG_FILE="$HOME/.zshrc.d/configs/mise/config.toml"
+export MISE_GLOBAL_CONFIG_FILE="$ZDOTDIR/configs/mise/config.toml"
 
 # =============================================================================
 # Mise initialization

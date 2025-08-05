@@ -5,7 +5,7 @@
 # =============================================================================
 
 # Set custom Starship configuration location
-export STARSHIP_CONFIG="$HOME/.zshrc.d/configs/starship/config.toml"
+export STARSHIP_CONFIG="$ZDOTDIR/configs/starship/config.toml"
 
 # Initialize Starship prompt for zsh
 if command -v starship >/dev/null; then

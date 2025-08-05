@@ -8,6 +8,14 @@ A blazing fast, maintainable, and feature-rich zsh configuration built for devel
 
 ## 🏗️ Architecture
 
+### ZDOTDIR Structure
+
+This configuration uses zsh's `ZDOTDIR` mechanism to keep everything organized in `~/.zshrc.d/`:
+
+1. **`.zshenv`** sets `ZDOTDIR="$HOME/.zshrc.d"`
+2. **Zsh automatically finds `.zshrc`** inside `$ZDOTDIR`
+3. **`.zshrc` loads all numbered files** in lexicographic order
+
 ### Numbered File System
 
 Files are loaded in **lexicographic order** by the main `.zshrc` loader:
@@ -63,8 +71,8 @@ The bootstrap script handles everything automatically:
 **What it does:**
 - ✅ Verifies Homebrew installation
 - ✅ Installs all required packages
-- ✅ Symlinks `~/.zshrc` → `~/.zshrc.d/.zshrc`
-- ✅ Backs up existing `~/.zshrc` if needed
+- ✅ Symlinks `~/.zshenv` → `~/.zshrc.d/.zshenv`
+- ✅ Backs up existing `~/.zshenv` if needed
 
 ### 3. Reload Shell
 
