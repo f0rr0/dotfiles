@@ -1,5 +1,8 @@
 # zsh caches
 .zsh_plugins.zsh
+.zcompcache/
+.zcompdump
+.zsh_sessions/
 
 # macOS
 .DS_Store
