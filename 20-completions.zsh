@@ -28,6 +28,10 @@ fi
 # Group completion matches by category
 zstyle ':completion:*' group-name ''
 
+# Cache completion results to speed up repeated completions
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path "$ZDOTDIR/.zcompcache"
+
 # Smart matching patterns:
 # - Case-insensitive matching (m:{a-z}={A-Z})
 # - Treat . _ - as word separators for partial matching

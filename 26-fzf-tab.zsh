@@ -24,8 +24,8 @@ if command -v fzf >/dev/null; then
   # Show file content preview for regular files (but not directories, handled above)
   zstyle ':fzf-tab:complete:*:*' fzf-preview '[[ -f $realpath ]] && (bat --color=always --style=numbers --line-range=:500 $realpath 2>/dev/null || head -200 $realpath)'
   
-  # Make fzf-tab follow FZF_DEFAULT_OPTS (inherits your fzf settings)
-  zstyle ':fzf-tab:*' use-fzf-default-opts yes
+  # Keep fzf-tab options scoped (avoid inheriting FZF_DEFAULT_OPTS)
+  zstyle ':fzf-tab:*' fzf-flags --height=60% --layout=reverse --border --info=inline
   
   # Switch group using `<` and `>`
   zstyle ':fzf-tab:*' switch-group '<' '>'

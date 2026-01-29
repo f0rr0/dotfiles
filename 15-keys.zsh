@@ -37,12 +37,3 @@ bindkey '\e[3;3~' kill-word             # Option+Delete (⌥⌦) on some setups
 
 # Ensure backspace works correctly
 bindkey '^H' backward-delete-char
-
-# =============================================================================
-# History navigation
-# =============================================================================
-
-# Up/Down arrows for incremental history substring search
-# (requires zsh-history-substring-search plugin)
-bindkey '^[[A' history-substring-search-up    # Up arrow (↑)
-bindkey '^[[B' history-substring-search-down  # Down arrow (↓)

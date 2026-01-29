@@ -4,9 +4,17 @@
 # Antidote initialization
 # =============================================================================
 
-# Load Antidote from Homebrew installation
-if brew list --versions antidote >/dev/null 2>&1; then
-  _antidote_prefix="$(brew --prefix antidote)"
+# Load Antidote from Homebrew installation without calling brew
+_antidote_prefix=""
+if [[ -n "$HOMEBREW_PREFIX" && -r "$HOMEBREW_PREFIX/opt/antidote/share/antidote/antidote.zsh" ]]; then
+  _antidote_prefix="$HOMEBREW_PREFIX/opt/antidote"
+elif [[ -r "/opt/homebrew/opt/antidote/share/antidote/antidote.zsh" ]]; then
+  _antidote_prefix="/opt/homebrew/opt/antidote"
+elif [[ -r "/usr/local/opt/antidote/share/antidote/antidote.zsh" ]]; then
+  _antidote_prefix="/usr/local/opt/antidote"
+fi
+
+if [[ -n "$_antidote_prefix" ]]; then
   source "$_antidote_prefix/share/antidote/antidote.zsh"
   unset _antidote_prefix
 else

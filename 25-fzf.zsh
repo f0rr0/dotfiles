@@ -48,16 +48,22 @@ else
   export FZF_ALT_C_OPTS="--preview 'command ls -la {} | head -n 200' --preview-window=right,60%"
 fi
 
-# Load fzf shell integration (Homebrew)
-_brew_prefix="$(brew --prefix)"
+# Load fzf shell integration (Homebrew) without calling brew
+_brew_prefix="${HOMEBREW_PREFIX:-}"
+if [[ -z "$_brew_prefix" ]]; then
+  [[ -d /opt/homebrew ]] && _brew_prefix="/opt/homebrew"
+  [[ -z "$_brew_prefix" && -d /usr/local ]] && _brew_prefix="/usr/local"
+fi
 
-# Load completion first (doesn't conflict with compinit already run)
-[[ -r "$_brew_prefix/opt/fzf/shell/completion.zsh" ]] && \
-  source "$_brew_prefix/opt/fzf/shell/completion.zsh"
+if [[ -n "$_brew_prefix" ]]; then
+  # Load completion first (doesn't conflict with compinit already run)
+  [[ -r "$_brew_prefix/opt/fzf/shell/completion.zsh" ]] && \
+    source "$_brew_prefix/opt/fzf/shell/completion.zsh"
 
-# Load key bindings for Ctrl-T (files), Alt-C (cd), and Ctrl-R (history)
-if [[ -r "$_brew_prefix/opt/fzf/shell/key-bindings.zsh" ]]; then
-  source "$_brew_prefix/opt/fzf/shell/key-bindings.zsh"
+  # Load key bindings for Ctrl-T (files), Alt-C (cd), and Ctrl-R (history)
+  if [[ -r "$_brew_prefix/opt/fzf/shell/key-bindings.zsh" ]]; then
+    source "$_brew_prefix/opt/fzf/shell/key-bindings.zsh"
+  fi
 fi
 
 unset _brew_prefix
