@@ -5,7 +5,17 @@
 # =============================================================================
 
 # Default editor/visual editor/pager
-: ${EDITOR:=cursor}
+if [[ -z "$EDITOR" ]]; then
+  if command -v cursor >/dev/null 2>&1; then
+    EDITOR=cursor
+  elif command -v nvim >/dev/null 2>&1; then
+    EDITOR=nvim
+  elif command -v vim >/dev/null 2>&1; then
+    EDITOR=vim
+  else
+    EDITOR=vi
+  fi
+fi
 : ${VISUAL:=$EDITOR}
 : ${PAGER:=less}
 

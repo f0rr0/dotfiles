@@ -14,15 +14,27 @@ export FZF_DEFAULT_OPTS="
   --bind=alt-j:down,alt-k:up,alt-u:half-page-up,alt-d:half-page-down
 "
 
+_fzf_copy_binding='abort'
+if command -v pbcopy >/dev/null 2>&1; then
+  _fzf_copy_binding='execute-silent(echo -n {2..} | pbcopy)+abort'
+elif command -v wl-copy >/dev/null 2>&1; then
+  _fzf_copy_binding='execute-silent(echo -n {2..} | wl-copy)+abort'
+elif command -v xclip >/dev/null 2>&1; then
+  _fzf_copy_binding='execute-silent(echo -n {2..} | xclip -selection clipboard)+abort'
+elif command -v xsel >/dev/null 2>&1; then
+  _fzf_copy_binding='execute-silent(echo -n {2..} | xsel --clipboard --input)+abort'
+fi
+
 # Configure fzf history search (Ctrl-R)
 export FZF_CTRL_R_OPTS="
   --preview 'echo {}' 
   --preview-window down:3:hidden:wrap
   --bind 'ctrl-/:toggle-preview'
-  --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
+  --bind 'ctrl-y:${_fzf_copy_binding}'
   --color header:italic
   --header 'Press CTRL-Y to copy command into clipboard'
 "
+unset _fzf_copy_binding
 
 # Prefer fd for file/dir sources; fall back to find
 if command -v fd >/dev/null; then

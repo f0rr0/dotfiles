@@ -13,8 +13,9 @@ A blazing fast, maintainable, and feature-rich zsh configuration built for devel
 This configuration uses zsh's `ZDOTDIR` mechanism to keep everything organized in `~/.zshrc.d/`:
 
 1. **`.zshenv`** sets `ZDOTDIR="$HOME/.zshrc.d"`
-2. **Zsh automatically finds `.zshrc`** inside `$ZDOTDIR`
-3. **`.zshrc` loads all numbered files** in lexicographic order
+2. **`.zprofile`** handles login-shell setup after macOS `path_helper`
+3. **`.zshrc`** loads all numbered files in lexicographic order for interactive shells
+4. **`_noninteractive-essentials.zsh`** gives scripts the expected PATH and mise setup without loading prompts/plugins/completions
 
 ### Numbered File System
 
@@ -30,25 +31,44 @@ Files are loaded in **lexicographic order** by the main `.zshrc` loader:
 
 > 💡 **Tip**: Prefix a file with `_` to disable it (e.g., `_30-antidote.zsh`)
 
+### Shell Startup Split
+
+Interactive shells load the full numbered configuration through `.zshrc`.
+
+Non-interactive shells intentionally load only essentials:
+
+- non-login scripts: `.zshenv` sources `_noninteractive-essentials.zsh`
+- login scripts: `.zprofile` sources `_noninteractive-essentials.zsh` after macOS `path_helper`
+
+This keeps Homebrew, user-local binaries, and mise-managed tools available in scripts while avoiding prompt, completion, and plugin startup cost outside interactive shells.
+
+Ignored local overrides such as `70-local.zsh` are not loaded in non-interactive shells by default. To opt in for a specific script, set:
+
+```bash
+ZSH_LOAD_LOCAL_IN_NONINTERACTIVE=1 zsh -lc '...'
+```
+
 ### Config Directory
 
 The `configs/` directory contains external tool configurations.
 
 ## 📋 Requirements
 
-### Homebrew (Required)
+### Package Managers
 
-This configuration requires [Homebrew](https://brew.sh/) for package management:
+On macOS, this configuration uses [Homebrew](https://brew.sh/) for package management:
 
 ```bash
 # macOS
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
+On Ubuntu/Debian, `scripts/bootstrap.sh` uses `apt` for system packages and installs Antidote, Starship, mise, and uv into user-local paths when needed.
+
 ### Supported Platforms
 
 - ✅ **macOS** (Apple Silicon & Intel)
-- ✅ **Linux** (not tested)
+- ✅ **Linux** (Ubuntu/Debian remote hosts)
 - ❌ Windows (not tested)
 
 ## ⚡ Quick Start
@@ -69,10 +89,10 @@ The bootstrap script handles everything automatically:
 ```
 
 **What it does:**
-- ✅ Verifies Homebrew installation
-- ✅ Installs all required packages
+- ✅ Installs required packages via Homebrew on macOS or apt/user-local installers on Ubuntu/Debian
 - ✅ Symlinks `~/.zshenv` → `~/.zshrc.d/.zshenv`
 - ✅ Backs up existing `~/.zshenv` if needed
+- ✅ Installs mise-managed runtimes from `configs/mise/config.toml`
 
 ### 3. Reload Shell
 
@@ -127,7 +147,7 @@ path=(/opt/work/bin $path)
 
 ## 📦 Installed Packages
 
-The bootstrap script installs these packages via Homebrew:
+The bootstrap script installs these packages via Homebrew on macOS or apt/user-local installers on Ubuntu/Debian:
 
 **Modern CLI Replacements:**
 - `eza` - Better `ls`
@@ -135,7 +155,7 @@ The bootstrap script installs these packages via Homebrew:
 - `ripgrep` - Better `grep`
 - `fd` - Better `find`
 - `delta` - Better git diff
-- `dust` - Better `du`
-- `procs` - Better `ps`
+- `dust` - Better `du` (Homebrew path)
+- `procs` - Better `ps` (Homebrew path)
 
 ---

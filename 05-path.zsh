@@ -19,3 +19,7 @@ elif [[ -x /usr/local/bin/brew ]]; then
   # Intel Macs
   eval "$(/usr/local/bin/brew shellenv)"
 fi
+
+# User-local binaries should beat system binaries on both macOS and Linux.
+[[ -d "$HOME/bin" ]] && path=("$HOME/bin" $path)
+[[ -d "$HOME/.local/bin" ]] && path=("$HOME/.local/bin" $path)

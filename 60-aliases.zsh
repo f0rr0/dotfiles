@@ -53,3 +53,6 @@ command -v fd >/dev/null && alias fdf='fd --hidden --follow --exclude .git'
 
 # Remove Graphite alias if it exists
 (( $+aliases[gt] )) && unalias gt
+
+# System cleanup helper (Graphite + Conductor WebKit workers)
+alias cleanupload='$HOME/.zshrc.d/scripts/cleanup-load.sh'
