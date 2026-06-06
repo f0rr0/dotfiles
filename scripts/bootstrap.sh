@@ -64,6 +64,7 @@ install_macos_packages() {
     starship
     zoxide
     fzf
+    gh
     mise
     uv
     eza
@@ -94,13 +95,21 @@ install_macos_packages() {
 
 install_linux_packages() {
   if command -v apt-get >/dev/null 2>&1; then
+    msg "Configuring GitHub CLI apt repository"
+    sudo mkdir -p -m 755 /etc/apt/keyrings /etc/apt/sources.list.d
+    curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | \
+      sudo tee /etc/apt/keyrings/githubcli-archive-keyring.gpg >/dev/null
+    sudo chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | \
+      sudo tee /etc/apt/sources.list.d/github-cli.list >/dev/null
+
     msg "Installing Ubuntu/Debian packages"
     sudo apt-get update
     sudo apt-get install -y \
       zsh git curl ca-certificates unzip less lsof procps \
       build-essential pkg-config cmake make \
       fzf ripgrep fd-find bat eza zoxide git-delta httpie jq btop \
-      neovim tmux direnv
+      gh neovim tmux direnv
   else
     warn "No apt-get found; installing only user-local tools"
   fi

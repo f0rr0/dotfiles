@@ -155,6 +155,7 @@ The bootstrap script installs these packages via Homebrew on macOS or apt/user-l
 - `ripgrep` - Better `grep`
 - `fd` - Better `find`
 - `delta` - Better git diff
+- `gh` - GitHub CLI
 - `dust` - Better `du` (Homebrew path)
 - `procs` - Better `ps` (Homebrew path)
 
