@@ -93,6 +93,14 @@ _codex_app_server_processes() {
   '
 }
 
+_codex_app_server_detected() {
+  local sock="${1:-$CODEX_APP_SERVER_SOCK}"
+  local pids
+  [[ -S "$sock" ]] && return 0
+  pids="$(_codex_app_server_pids "$sock" | tr -d '[:space:]')"
+  [[ -n "$pids" ]]
+}
+
 codex-app-server-status() {
   local sock="${1:-$CODEX_APP_SERVER_SOCK}"
   print "Active Codex login: $(codex-auth-current 2>/dev/null)"
@@ -123,12 +131,22 @@ codex-app-server-stop() {
 }
 
 codex-app-server-restart() {
+  local force=0
+  if [[ "${1:-}" == "--force" ]]; then
+    force=1
+    shift
+  fi
   local sock="${1:-$CODEX_APP_SERVER_SOCK}"
   local pidfile="$HOME/.codex/app-server-control/app-server.pid"
   local logfile="$HOME/.codex/app-server-control/app-server.log"
   if ! command -v codex >/dev/null 2>&1; then
     print -u2 "codex command not found on PATH"
     return 127
+  fi
+  if ! _codex_app_server_detected "$sock" && (( ! force )); then
+    print "No Codex app-server detected for: $sock"
+    print "Not starting one. Use 'codex-app-server-restart --force' only if this machine should host a Codex app-server."
+    return 0
   fi
   codex-app-server-stop "$sock" >/dev/null
   mkdir -p "${sock:h}" "$HOME/.codex/app-server-control" || return
