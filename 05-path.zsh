@@ -23,3 +23,4 @@ fi
 # User-local binaries should beat system binaries on both macOS and Linux.
 [[ -d "$HOME/bin" ]] && path=("$HOME/bin" $path)
 [[ -d "$HOME/.local/bin" ]] && path=("$HOME/.local/bin" $path)
+[[ -d "$HOME/.local/libexec/codex-workload/bin" ]] && path=("$HOME/.local/libexec/codex-workload/bin" $path)

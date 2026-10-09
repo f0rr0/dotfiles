@@ -52,6 +52,11 @@ ZSH_LOAD_LOCAL_IN_NONINTERACTIVE=1 zsh -lc '...'
 
 The `configs/` directory contains external tool configurations.
 
+On the Linux devbox, `scripts/install-devbox-memory-guard.sh` places commands
+launched through RTK in cgroup-v2 workload scopes. The workload boundary uses
+85%/90% soft and hard RAM limits, while the user slice has a 95% final ceiling
+that leaves SSH, Tailscale, and system services reachable.
+
 ## 📋 Requirements
 
 ### Package Managers

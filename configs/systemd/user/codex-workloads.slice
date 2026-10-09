@@ -1,0 +1,8 @@
+[Unit]
+Description=Resource boundary for Codex development workloads
+
+[Slice]
+MemoryAccounting=yes
+MemoryHigh=85%
+MemoryMax=90%
+MemorySwapMax=7G
